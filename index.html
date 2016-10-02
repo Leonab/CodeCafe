@@ -38,11 +38,11 @@
                 </md-toolbar>
 				
                 <br>
-            <div ng-repeat="item in options">
-             <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
-                  {{ item }}
-               </md-checkbox>
-            </div>
+                <div ng-repeat="item in options">
+                    <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                        {{ item }}
+                    </md-checkbox>
+                </div>
 
 
 				<md-toolbar class="md-theme-indigo">
@@ -50,16 +50,22 @@
                 </md-toolbar>
 				
 				<h3><strong>Top two submissions attempted:</strong></h3>
-				<p>{{storage.t2r[0]}}<br>
-				{{storage.t2r[1]}}</p>
+				<p>
+				   {{storage.t2r[0]}}<br>
+				   {{storage.t2r[1]}}
+				</p>
 				
 				<h3><strong>Submissions per level</strong></h3>
-				<p>Hard: {{storage.diffi.hard}}<br>
-				Medium: {{storage.diffi.medium}}<br>
-				Easy: {{storage.diffi.easy}}</p>
+				<p>
+				   <b>Hard:</b> {{storage.diffi.hard}}<br>
+				   <b>Medium:</b> {{storage.diffi.medium}}<br>
+				   <b>Easy:</b> {{storage.diffi.easy}}
+				</p>
 				
 				<h3><strong>Total submissions</strong></h3>
-				<p>{{storage.total}}</p>
+				<p>
+				   <b>{{storage.total}}</b>
+				</p>
 				
         </md-sidenav>
 

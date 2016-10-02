@@ -39,31 +39,29 @@ angular.module('MyApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate'])
 						console.log($scope.url);
 						
 										
-				var size1 = $scope.details.websites.length;
-                var size2 = $scope.url.length;   
+				        var size1 = $scope.details.websites.length;
+                        var size2 = $scope.url.length;   
 			    
+				        /*Assigning icons to submissions*/
+				        for (var i = 0; i < size1; ++i) 
+				        {
+					        for (var j = 0; j < size2; j++)
+					        {
+						        if($scope.url[j].language===$scope.details.websites[i].language)
+					            $scope.details.websites[i].icon = $scope.url[j].icon;
+					        }
+				        }
 				
-				for (var i = 0; i < size1; ++i) 
-				{
-					for(var j=0; j < size2; j++)
-					{
-						if($scope.url[j].language===$scope.details.websites[i].language)
-					    $scope.details.websites[i].icon = $scope.url[j].icon;
-					}
-				}
 				
-				
-				
-
 				});
 				
 				
 				
 				
-					
+				//Size of first request	
 				var size1 = $scope.details.websites.length;
 				
-				
+				//Compiler status for checkboxes
 				for (var i = 0; i < size1; ++i)
 				{
 					if($scope.details.websites[i].compiler_status[0]==='A')
@@ -79,12 +77,14 @@ angular.module('MyApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate'])
 				}
 				
 				
-					
+				/*===Creating object for localStorage===*/	
+				
+				$scope.storage = {};
 				var max1=0;
 				var max2=0;
 
 				var top2array = {};
-				$scope.storage = {};
+
 				
 				for (var i = 0; i < size1; ++i)
 				{
@@ -99,10 +99,8 @@ angular.module('MyApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate'])
 						top2array[1]=$scope.details.websites[i].title;
 					}
 				}
-				/*for (var i = 0; i < size1; ++i)
-				{
-					$scope.details.websites[i].language
-				}*/
+
+				
 				var hard=0,medium=0,easy=0;			
 				for (var i = 0; i < size1; ++i)
 				{
@@ -117,21 +115,18 @@ angular.module('MyApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate'])
 
 
 				var difficulty = {};
-				
 				difficulty = {'hard':hard, 'medium':medium, 'easy':easy};
 				
 				var sum=0;
-				
 				for (var i = 0; i < size1; ++i)
 				{
 					sum=sum + $scope.details.websites[i].metadata.users_attempted;
 				}
-				console.log(sum);
 				
 				
 				
 				
-				
+				//Check if localStorage is available
 				if(typeof(Storage) !== "undefined") {
     
 	                var testObject = {'t2r': top2array, 'diffi': difficulty, 'total': sum };
@@ -144,53 +139,36 @@ angular.module('MyApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate'])
 
                    $scope.storage = JSON.parse(retrievedObject);
 				   console.log($scope.storage);
-                   }
+                }
 					
 					
 
 					
 				
-	$scope.selected = []; 
-	$scope.options = [];
+	            $scope.selected = []; 
+	            $scope.options = [];
 	 
-     $scope.toggle = function (item, list) {
-       var idx = list.indexOf(item);
-       if (idx > -1) list.splice(idx, 1);
-       else list.push(item);
-     };
+                $scope.toggle = function (item, list) {
+                    var idx = list.indexOf(item);
+                    if (idx > -1) 
+						list.splice(idx, 1);
+                    else 
+						list.push(item);
+                };
      
-     // is item exists in list
-     $scope.exists = function (item, list) {
-       return list.indexOf(item) > -1;
-     };
+                // does the item exist in list
+                $scope.exists = function (item, list) {
+                    return list.indexOf(item) > -1;
+                };
      
-     // process user data and prepare whole places
-     angular.forEach($scope.details.websites, function(item, key) {
-        if($scope.options.indexOf(item.compiler_status) == -1) {
-            $scope.options.push(item.compiler_status);
-        }     
-     });
-
-				
-				console.log($scope.details);
-
+                // process user data and prepare whole places
+                angular.forEach($scope.details.websites, function(item, key) {
+                    if($scope.options.indexOf(item.compiler_status) == -1) {
+                        $scope.options.push(item.compiler_status);
+                    }     
+                });
             });
-
-
     }
-	
-	
-	
-	
-	$scope.store = function() {
-
-}
-
-
-	 
-	 
- 
-	
 
 }])
 

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" ng-app="MyApp">
+
+<head>
+
+    <!-- Scrolls -->
+	
+    <meta name="viewport" content="initial-scale=1" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' type='text/css'>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
+
+    <link rel="stylesheet" href="css/style.css">
+    
+	<title>codeCafe</title>
+</head>
+
+<body layout="column" ng-controller="main">
+
+    <md-toolbar layout="row">
+        <div class="md-toolbar">
+            <h1 md-is-locked-open="$mdMedia('gt-sm')"><i class="material-icons md-48">face</i>Codecafe</h1><h4> -code with stats</h4>
+        </div>
+        <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
+            <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
+        </md-button>
+    </md-toolbar>
+	
+    <div layout="row" flex>
+	
+        <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+			
+                <md-toolbar class="md-theme-indigo">
+                    <h1 class="md-toolbar-tools">Filters</h1>
+                </md-toolbar>
+				
+                <br>
+            <div ng-repeat="item in options">
+             <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                  {{ item }}
+               </md-checkbox>
+            </div>
+
+
+				<md-toolbar class="md-theme-indigo">
+                    <h1 class="md-toolbar-tools">Stats</h1>
+                </md-toolbar>
+				
+        </md-sidenav>
+
+
+
+
+        <div layout="column" flex id="content">
+		
+            <md-content layout="column" flex class="md-padding">
+			
+                <md-input-container class="md-block" style="max-width:80%">
+                    <!-- Use floating placeholder instead of label -->
+                    <i class="material-icons">search</i>
+                    <input ng-model="search" ng-model-options="{ debounce: 800 }" onclick="select()" placeholder="search (by tag)" class="form-control" autofocus>
+                </md-input-container>
+				
+                <br><br>             
+				
+				
+                
+                <h2><strong>Found total:</strong> {{details.paths.length}}</h2>
+                <h3><strong>Showing:</strong> {{filteredResults.length}}</h3>
+				
+                <div ng-repeat="items in filteredResults = (details.websites | selectedTags:selected)" style="width:80%;">
+
+                     <div class="card md-block"">
+					    <img ng-src="{{items.icon}}" class="md-avatar-icon" alt="icon" style="height:50px;width:50px;"><strong><h1>{{ items.title}}</a></strong></h1>
+					    <md-button class="md-primary md-raised">{{items.compiler_status}}</md-button>
+						<md-button>{{items.language}}</md-button>
+							<div class="inner-border">
+							<pre>{{items.source_code}}</pre>
+							</div>
+						
+                     </div>
+						<br>
+						<br>
+                </div>
+
+                    <br>
+
+               
+            </md-content>
+        </div>
+    </div>
+	
+	
+
+
+
+    <!-- Angular Material Dependencies -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="app.js"></script>
+
+
+
+
+</body>
+
+</html>

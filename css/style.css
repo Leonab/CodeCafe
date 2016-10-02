@@ -1,0 +1,45 @@
+.md-toolbar-tools h1 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: inherit;
+}
+
+h2,h3 { 
+   font-family: 'Open Sans Condensed', sans-serif;
+   font-weight: 400; 
+}
+
+h1,h4 {
+	display: inline;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+	padding: 5px;
+	max-width: 80%;
+}
+
+.card1:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+.inner-border {
+    background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 16px !important;
+    color: #000;
+    margin: 10px;
+    padding: 0.0em 16px;
+    position: relative;
+}
+/*.inner-border:before {
+    
+    content: "";
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    left: -10px;
+    right: -10px;
+}*/

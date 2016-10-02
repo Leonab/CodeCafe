@@ -41,11 +41,29 @@ angular.module('MyApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate'])
 										
 				var size1 = $scope.details.websites.length;
                 var size2 = $scope.url.length;   
-				/*if(localStorage.num)
-					console.log("yum");
-				else
-				{*/
 			    
+				
+				for (var i = 0; i < size1; ++i) 
+				{
+					for(var j=0; j < size2; j++)
+					{
+						if($scope.url[j].language===$scope.details.websites[i].language)
+					    $scope.details.websites[i].icon = $scope.url[j].icon;
+					}
+				}
+				
+				
+				
+
+				});
+				
+				
+				
+				
+					
+				var size1 = $scope.details.websites.length;
+				
+				
 				for (var i = 0; i < size1; ++i)
 				{
 					if($scope.details.websites[i].compiler_status[0]==='A')
@@ -60,17 +78,11 @@ angular.module('MyApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate'])
 						$scope.details.websites[i].cstatus = 5;
 				}
 				
-				for (var i = 0; i < size1; ++i) 
-				{
-					for(var j=0; j < size2; j++)
-					{
-						if($scope.url[j].language===$scope.details.websites[i].language)
-					    $scope.details.websites[i].icon = $scope.url[j].icon;
-					}
-				}
 				
+					
 				var max1=0;
 				var max2=0;
+
 				var top2array = {};
 				$scope.storage = {};
 				
@@ -91,10 +103,38 @@ angular.module('MyApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate'])
 				{
 					$scope.details.websites[i].language
 				}*/
+				var hard=0,medium=0,easy=0;			
+				for (var i = 0; i < size1; ++i)
+				{
+					if($scope.details.websites[i].metadata.level[0]=='H')
+						hard++;
+					if($scope.details.websites[i].metadata.level[0]=='M')
+						medium++;
+					if($scope.details.websites[i].metadata.level[0]=='E')
+						easy++;
 				
-				    if(typeof(Storage) !== "undefined") {
+				}
+
+
+				var difficulty = {};
+				
+				difficulty = {'hard':hard, 'medium':medium, 'easy':easy};
+				
+				var sum=0;
+				
+				for (var i = 0; i < size1; ++i)
+				{
+					sum=sum + $scope.details.websites[i].metadata.users_attempted;
+				}
+				console.log(sum);
+				
+				
+				
+				
+				
+				if(typeof(Storage) !== "undefined") {
     
-	                var testObject = { 'one': 1, 'two': 2, 'three': 3,'t2r': top2array };
+	                var testObject = {'t2r': top2array, 'diffi': difficulty, 'total': sum };
 
                     // Put the object into storage
                     localStorage.setItem('testObject', JSON.stringify(testObject));
@@ -103,10 +143,11 @@ angular.module('MyApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate'])
                    var retrievedObject = localStorage.getItem('testObject');
 
                    $scope.storage = JSON.parse(retrievedObject);
+				   console.log($scope.storage);
                    }
-				
-				
-					});
+					
+					
+
 					
 				
 	$scope.selected = []; 

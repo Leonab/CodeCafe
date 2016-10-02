@@ -48,7 +48,18 @@
 				<md-toolbar class="md-theme-indigo">
                     <h1 class="md-toolbar-tools">Stats</h1>
                 </md-toolbar>
-				{{storage.t2r[0]}}
+				
+				<h3><strong>Top two submissions attempted:</strong></h3>
+				<p>{{storage.t2r[0]}}<br>
+				{{storage.t2r[1]}}</p>
+				
+				<h3><strong>Submissions per level</strong></h3>
+				<p>Hard: {{storage.diffi.hard}}<br>
+				Medium: {{storage.diffi.medium}}<br>
+				Easy: {{storage.diffi.easy}}</p>
+				
+				<h3><strong>Total submissions</strong></h3>
+				<p>{{storage.total}}</p>
 				
         </md-sidenav>
 
@@ -62,17 +73,17 @@
                 <md-input-container class="md-block">
                     <!-- Use floating placeholder instead of label -->
                     <i class="material-icons">search</i>
-                    <input ng-model="search" ng-model-options="{ debounce: 800 }" onclick="select()" placeholder="search (by tag)" class="form-control" autofocus>
+                    <input ng-model="search" ng-model-options="{ debounce: 800 }" onclick="select()" placeholder="search" class="form-control" autofocus>
                 </md-input-container>
 				
                 <br><br>             
 				
 				
                 
-                <h2><strong>Found total:</strong> {{details.paths.length}}</h2>
+                <h2><strong>Found total:</strong> {{details.websites.length}}</h2>
                 <h3><strong>Showing:</strong> {{filteredResults.length}}</h3>
 				
-                <div ng-repeat="items in filteredResults = (details.websites | selectedTags:selected)" >
+                <div ng-repeat="items in filteredResults = (details.websites | filter:search | selectedTags:selected)" >
 
                     <md-card>
                         <md-card-title>

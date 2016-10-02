@@ -70,6 +70,31 @@ angular.module('MyApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate'])
 					$scope.details.websites[i].icon = $scope.url[j].icon;
 					}
 				}
+				
+				var max1=0;
+				var max2=0;
+				$scope.top2array = {};
+				
+				for (var i = 0; i < size1; ++i)
+				{
+					if($scope.details.websites[i].metadata.users_attempted>=max1)
+					{
+						max1=$scope.details.websites[i].metadata.users_attempted;
+						$scope.top2array[0]=$scope.details.websites[i].title;
+					}
+					else if($scope.details.websites[i].metadata.users_attempted>=max2&&$scope.details.websites[i].metadata.users_attempted<max1)
+					{
+						max2=$scope.details.websites[i].metadata.users_attempted;
+						$scope.top2array[1]=$scope.details.websites[i].title;
+					}
+				}
+				console.log($scope.top2array);
+				/*for (var i = 0; i < size1; ++i)
+				{
+					$scope.details.websites[i].language
+				}*/
+				
+				
 					});
 					
 				
@@ -107,14 +132,16 @@ angular.module('MyApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate'])
 	
 	$scope.store = function() {
     if(typeof(Storage) !== "undefined") {
-        if (localStorage.clickcount) {
-            localStorage.clickcount = Number(localStorage.clickcount)+1;
-        } else {
-            localStorage.clickcount = 1;
-        }
-        document.getElementById("result").innerHTML = "Total Upvotes:" + localStorage.clickcount;
-    } else {
-        document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+    
+	var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+
+// Put the object into storage
+localStorage.setItem('testObject', JSON.stringify(testObject));
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('retrievedObject: ', JSON.parse(retrievedObject));
     }
 }
 

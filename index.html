@@ -48,6 +48,7 @@
 				<md-toolbar class="md-theme-indigo">
                     <h1 class="md-toolbar-tools">Stats</h1>
                 </md-toolbar>
+				{{top2array[0]}}
 				
         </md-sidenav>
 
@@ -58,7 +59,7 @@
 		
             <md-content layout="column" flex class="md-padding">
 			
-                <md-input-container class="md-block" style="max-width:80%">
+                <md-input-container class="md-block">
                     <!-- Use floating placeholder instead of label -->
                     <i class="material-icons">search</i>
                     <input ng-model="search" ng-model-options="{ debounce: 800 }" onclick="select()" placeholder="search (by tag)" class="form-control" autofocus>
@@ -71,17 +72,25 @@
                 <h2><strong>Found total:</strong> {{details.paths.length}}</h2>
                 <h3><strong>Showing:</strong> {{filteredResults.length}}</h3>
 				
-                <div ng-repeat="items in filteredResults = (details.websites | selectedTags:selected)" style="width:80%;">
+                <div ng-repeat="items in filteredResults = (details.websites | selectedTags:selected)" >
 
-                     <div class="card md-block"">
-					    <img ng-src="{{items.icon}}" class="md-avatar-icon" alt="icon" style="height:50px;width:50px;"><strong><h1>{{ items.title}}</a></strong></h1>
-					    <md-button class="md-primary md-raised">{{items.compiler_status}}</md-button>
-						<md-button>{{items.language}}</md-button>
-							<div class="inner-border">
-							<pre>{{items.source_code}}</pre>
-							</div>
+                    <md-card>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <img ng-src="{{items.icon}}" class="md-avatar-icon" alt="icon" style="height:50px;width:50px;"><strong><h1>{{ items.title}}</a></strong></h1>
+                            </md-card-title-text>
+                        </md-card-title>
+
+                        <md-card-content>
 						
-                     </div>
+                           <div class="inner-border">
+						   <md-button class="md-primary md-raised" style="float:right;">{{items.compiler_status}}</md-button>
+						<md-button style="float:right;">{{items.language}}</md-button>
+						<br><br>
+							<pre flex>{{items.source_code}}</pre>
+							</div>
+                        </md-card-content>
+                    </md-card>
 						<br>
 						<br>
                 </div>

@@ -3,7 +3,7 @@ angular.module('MyApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate'])
 .config(function($mdThemingProvider) {
 
     $mdThemingProvider.theme('default')
-        .primaryPalette('yellow')
+        .primaryPalette('red')
         .accentPalette('pink');
 
 

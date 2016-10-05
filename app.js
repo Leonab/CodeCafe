@@ -1,13 +1,13 @@
 angular.module('MyApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate'])
 
-/*.config(function($mdThemingProvider) {
+.config(function($mdThemingProvider) {
 
     $mdThemingProvider.theme('default')
-        .primaryPalette('pink')
-        .accentPalette('orange');
+        .primaryPalette('yellow')
+        .accentPalette('pink');
 
 
-})*/
+})
 
 
 
